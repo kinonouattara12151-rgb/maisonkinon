@@ -60,10 +60,10 @@ function ChatProductCard({
       <div className="min-w-0 flex-1">
         <p className="truncate text-[11px] font-semibold text-foreground">{product.name}</p>
         <p className="text-[10px] text-muted-foreground">{product.brand} · {product.volume}</p>
-        <p className="text-[11px] font-bold text-primary">{product.price} €
+        <p className="text-[11px] font-bold text-primary">{product.price.toLocaleString("fr-FR")} FCFA
           {product.originalPrice && (
             <span className="ml-1 text-[10px] font-normal text-muted-foreground line-through">
-              {product.originalPrice} €
+              {product.originalPrice.toLocaleString("fr-FR")} FCFA
             </span>
           )}
         </p>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Minus, Plus, Trash2, ShoppingBag, X, ArrowRight, LogIn } from "lucide-react";
 import type { CartItem, DeliveryInfo } from "../types";
 import { useAuth } from "../context/AuthContext";
@@ -102,7 +102,7 @@ export default function CartDrawer({
                         </button>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-foreground">{(item.product.price * item.quantity).toLocaleString("fr-FR")} €</span>
+                        <span className="text-sm font-bold text-foreground">{(item.product.price * item.quantity).toLocaleString("fr-FR")} FCFA</span>
                         <button type="button" aria-label={`Retirer ${item.product.name}`} onClick={() => onRemove(item.product.id)} className="text-muted-foreground hover:text-red-500">
                           <Trash2 size={13} />
                         </button>
@@ -120,16 +120,16 @@ export default function CartDrawer({
           <div className="space-y-3 border-t border-border p-4">
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">Sous-total</span>
-              <span className="text-base font-bold text-foreground">{cartTotal.toLocaleString("fr-FR")} €</span>
+              <span className="text-base font-bold text-foreground">{cartTotal.toLocaleString("fr-FR")} FCFA</span>
             </div>
-            <p className="text-[11px] text-muted-foreground">Livraison gratuite dès 40 € · Délai max 2 jours</p>
+            <p className="text-[11px] text-muted-foreground">Livraison gratuite dès 26 200 FCFA · Délai max 2 jours</p>
             <button
               type="button"
               onClick={handleCheckoutClick}
               className="flex w-full items-center justify-center gap-2 bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-red-700"
             >
               {isLoggedIn
-                ? <><ArrowRight size={15} /> Commander ({cartTotal.toLocaleString("fr-FR")} €)</>
+                ? <><ArrowRight size={15} /> Commander ({cartTotal.toLocaleString("fr-FR")} FCFA)</>
                 : <><LogIn size={15} /> Se connecter pour commander</>
               }
             </button>

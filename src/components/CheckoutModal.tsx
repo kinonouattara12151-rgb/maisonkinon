@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import {
   X, Phone, MapPin, Calendar, Clock, ShoppingBag,
   ChevronRight, AlertCircle, CheckCircle2,
@@ -150,7 +150,7 @@ export default function CheckoutModal({
                       {item.product.name} × {item.quantity}
                     </span>
                     <span className="font-semibold text-foreground">
-                      {(item.product.price * item.quantity).toLocaleString("fr-FR")} €
+                      {(item.product.price * item.quantity).toLocaleString("fr-FR")} FCFA
                     </span>
                   </div>
                 ))}
@@ -158,7 +158,7 @@ export default function CheckoutModal({
               <div className="mt-2 flex items-center justify-between border-t border-border pt-2">
                 <span className="text-xs font-bold text-foreground">Total</span>
                 <span className="text-base font-black text-primary">
-                  {cartTotal.toLocaleString("fr-FR")} €
+                  {cartTotal.toLocaleString("fr-FR")} FCFA
                 </span>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { Pencil, Trash2 } from "lucide-react";
+﻿import { Pencil, Trash2 } from "lucide-react";
 import type { Product } from "../../types";
 
 interface ProductTableProps {
@@ -61,10 +61,10 @@ export default function ProductTable({ products, onEdit, onDelete }: ProductTabl
               <td className="px-3 py-2">{p.family}</td>
 
               <td className="px-3 py-2">
-                <span className="font-bold text-foreground">{p.price} €</span>
+                <span className="font-bold text-foreground">{p.price.toLocaleString("fr-FR")} FCFA</span>
                 {p.originalPrice && (
                   <span className="ml-1 text-muted-foreground line-through">
-                    {p.originalPrice} €
+                    {p.originalPrice.toLocaleString("fr-FR")} FCFA
                   </span>
                 )}
               </td>

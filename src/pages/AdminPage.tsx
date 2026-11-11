@@ -118,11 +118,11 @@ function buildStats(products: Product[]) {
 
   /* Distribution des prix par tranche */
   const priceRanges = [
-    { name: "< 80 €",    value: products.filter((p) => p.price < 80).length },
-    { name: "80–100 €",  value: products.filter((p) => p.price >= 80 && p.price <= 100).length },
-    { name: "100–130 €", value: products.filter((p) => p.price > 100 && p.price <= 130).length },
-    { name: "130–160 €", value: products.filter((p) => p.price > 130 && p.price <= 160).length },
-    { name: "> 160 €",   value: products.filter((p) => p.price > 160).length },
+    { name: "< 80 FCFA",    value: products.filter((p) => p.price < 80).length },
+    { name: "80–100 FCFA",  value: products.filter((p) => p.price >= 80 && p.price <= 100).length },
+    { name: "100–130 FCFA", value: products.filter((p) => p.price > 100 && p.price <= 130).length },
+    { name: "130–160 FCFA", value: products.filter((p) => p.price > 130 && p.price <= 160).length },
+    { name: "> 160 FCFA",   value: products.filter((p) => p.price > 160).length },
   ].filter((r) => r.value > 0);
 
   /* Top produits par prix décroissant */
@@ -185,7 +185,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       {payload.map((p: any) => (
         <p key={p.name} className="text-[11px]" style={{ color: p.color }}>
           {p.name} : <strong>{typeof p.value === "number" ? p.value.toLocaleString("fr-FR") : p.value}</strong>
-          {p.name === "Prix moyen" || p.name === "prix" ? " €" : ""}
+          {p.name === "Prix moyen" || p.name === "prix" ? " FCFA" : ""}
         </p>
       ))}
     </div>
@@ -401,8 +401,8 @@ export default function AdminPage() {
                 <KpiCard
                   icon={Tag}
                   label="Prix moyen"
-                  value={`${stats.avgPrice} €`}
-                  sub={`De ${stats.minPrice} € à ${stats.maxPrice} €`}
+                  value={`${stats.avgPrice} FCFA`}
+                  sub={`De ${stats.minPrice} FCFA à ${stats.maxPrice} FCFA`}
                 />
                 <KpiCard
                   icon={Package}
@@ -496,9 +496,9 @@ export default function AdminPage() {
                     <BarChart data={stats.avgPriceByFamily}>
                       <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 89%)" />
                       <XAxis dataKey="name" tick={{ fontSize: 10 }} />
-                      <YAxis tick={{ fontSize: 10 }} unit="€" domain={[0, "dataMax + 20"]} />
+                      <YAxis tick={{ fontSize: 10 }} unit="FCFA" domain={[0, "dataMax + 20"]} />
                       <Tooltip
-                        formatter={(v: number) => [`${v} €`, "Prix moyen"]}
+                        formatter={(v: number) => [`${v} FCFA`, "Prix moyen"]}
                         contentStyle={{ fontSize: 11 }}
                       />
                       <Bar dataKey="avg" name="Prix moyen" radius={[4, 4, 0, 0]}>
@@ -538,10 +538,10 @@ export default function AdminPage() {
                   <ResponsiveContainer width="100%" height={240}>
                     <BarChart data={stats.topByPrice} layout="vertical">
                       <CartesianGrid strokeDasharray="3 3" stroke="hsl(0 0% 89%)" />
-                      <XAxis type="number" tick={{ fontSize: 10 }} unit="€" />
+                      <XAxis type="number" tick={{ fontSize: 10 }} unit="FCFA" />
                       <YAxis dataKey="name" type="category" tick={{ fontSize: 10 }} width={110} />
                       <Tooltip
-                        formatter={(v: number) => [`${v} €`, "Prix"]}
+                        formatter={(v: number) => [`${v} FCFA`, "Prix"]}
                         contentStyle={{ fontSize: 11 }}
                       />
                       <Bar dataKey="prix" name="prix" radius={[0, 4, 4, 0]} fill="hsl(0 72% 45%)" />
@@ -674,7 +674,7 @@ export default function AdminPage() {
 
                       <div className="flex items-center gap-3">
                         <span className="text-base font-black text-foreground">
-                          {order.total.toLocaleString("fr-FR")} €
+                          {order.total.toLocaleString("fr-FR")} FCFA
                         </span>
                         {/* Sélecteur de statut */}
                         <select
@@ -768,7 +768,7 @@ export default function AdminPage() {
                                 </p>
                               </div>
                               <span className="flex-shrink-0 text-xs font-bold text-foreground">
-                                {(item.price * item.quantity).toLocaleString("fr-FR")} €
+                                {(item.price * item.quantity).toLocaleString("fr-FR")} FCFA
                               </span>
                             </div>
                           ))}

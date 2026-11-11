@@ -1,4 +1,4 @@
-import { Heart, Eye } from "lucide-react";
+﻿import { Heart, Eye } from "lucide-react";
 import type { Product, ViewMode } from "../types";
 
 interface ProductCardProps {
@@ -86,10 +86,10 @@ export default function ProductCard({
           <p className="mt-0.5 text-xs text-muted-foreground">{product.volume}</p>
 
           <div className="mt-2 flex items-center gap-2">
-            <span className="text-base font-bold text-foreground">{product.price} €</span>
+            <span className="text-base font-bold text-foreground">{product.price.toLocaleString("fr-FR")} FCFA</span>
             {product.originalPrice && (
               <span className="text-sm text-muted-foreground line-through">
-                {product.originalPrice} €
+                {product.originalPrice.toLocaleString("fr-FR")} FCFA
               </span>
             )}
             {discount !== null && (
@@ -174,11 +174,11 @@ export default function ProductCard({
         <p className="mt-0.5 text-[10px] text-muted-foreground">{product.volume}</p>
 
         <div className="mt-1.5 flex items-center gap-2">
-          <span className="text-sm font-bold text-foreground">{product.price} €</span>
+          <span className="text-sm font-bold text-foreground">{product.price.toLocaleString("fr-FR")} FCFA</span>
           {product.originalPrice && (
             <>
               <span className="text-xs text-muted-foreground line-through">
-                {product.originalPrice} €
+                {product.originalPrice.toLocaleString("fr-FR")} FCFA
               </span>
               {discount !== null && (
                 <span className="text-[10px] font-semibold text-primary">-{discount}%</span>

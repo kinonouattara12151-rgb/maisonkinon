@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+﻿import { useState, useRef, useEffect, useCallback } from "react";
 import { Search, X } from "lucide-react";
 import { PRODUCTS } from "../data/products";
 import type { Product } from "../types";
@@ -203,7 +203,7 @@ export default function SearchBar({
 
                   {/* Prix */}
                   <span className="flex-shrink-0 text-xs font-bold text-foreground">
-                    {product.price} €
+                    {product.price.toLocaleString("fr-FR")} FCFA
                   </span>
                 </button>
               ))}

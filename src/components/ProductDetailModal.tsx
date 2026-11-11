@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+﻿import { useState, useEffect, useRef, useCallback } from "react";
 import {
   X, Heart, ShoppingCart, ChevronLeft, ChevronRight,
   MapPin, Clock, Wind, Droplets, Info, BookOpen,
@@ -321,11 +321,11 @@ export default function ProductDetailModal({
               {/* Prix */}
               <div className="mb-4 flex items-center gap-3">
                 <span className="text-2xl font-black text-foreground">
-                  {product.price} €
+                  {product.price.toLocaleString("fr-FR")} FCFA
                 </span>
                 {product.originalPrice && (
                   <span className="text-base text-muted-foreground line-through">
-                    {product.originalPrice} €
+                    {product.originalPrice.toLocaleString("fr-FR")} FCFA
                   </span>
                 )}
                 {discount !== null && (

@@ -1,4 +1,4 @@
-import { ShoppingCart, Heart } from "lucide-react";
+﻿import { ShoppingCart, Heart } from "lucide-react";
 import type { Product } from "../types";
 
 interface RecommendationSectionProps {
@@ -75,10 +75,10 @@ export default function RecommendationSection({
                 <p className="mt-0.5 text-[9px] text-muted-foreground">{product.volume}</p>
 
                 <div className="mt-1 flex items-center gap-1.5">
-                  <span className="text-xs font-bold text-foreground">{product.price} €</span>
+                  <span className="text-xs font-bold text-foreground">{product.price.toLocaleString("fr-FR")} FCFA</span>
                   {product.originalPrice && (
                     <span className="text-[10px] text-muted-foreground line-through">
-                      {product.originalPrice} €
+                      {product.originalPrice.toLocaleString("fr-FR")} FCFA
                     </span>
                   )}
                   {discount !== null && (

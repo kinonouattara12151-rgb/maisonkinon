@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import type { ActiveFilters, FilterChip, Product } from "../types";
 
 export function useFilters(products: Product[]) {
@@ -48,12 +48,12 @@ export function useFilters(products: Product[]) {
           return false;
         }
 
-        if (category === "Prix (€)") {
+        if (category === "Prix (FCFA)") {
           const matchesPrice = [...values].some((range) => {
-            if (range === "Moins de 50 €") return product.price < 50;
-            if (range === "50 € – 100 €") return product.price >= 50 && product.price <= 100;
-            if (range === "100 € – 150 €") return product.price > 100 && product.price <= 150;
-            if (range === "Plus de 150 €") return product.price > 150;
+            if (range === "Moins de 50 000 FCFA") return product.price < 50000;
+            if (range === "50 000 – 75 000 FCFA") return product.price >= 50000 && product.price <= 75000;
+            if (range === "75 000 – 100 000 FCFA") return product.price > 75000 && product.price <= 100000;
+            if (range === "Plus de 100 000 FCFA") return product.price > 100000;
             return false;
           });
           if (!matchesPrice) return false;

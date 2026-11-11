@@ -1,4 +1,4 @@
-import { X, User, Package, LogOut, ShoppingBag, Calendar, ChevronDown, ChevronUp } from "lucide-react";
+﻿import { X, User, Package, LogOut, ShoppingBag, Calendar, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -51,7 +51,7 @@ function OrderCard({ order }: { order: Order }) {
         <div className="flex items-center gap-3">
           <StatusBadge status={order.status} />
           <span className="text-sm font-bold text-foreground">
-            {order.total.toLocaleString("fr-FR")} €
+            {order.total.toLocaleString("fr-FR")} FCFA
           </span>
           {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
         </div>
@@ -71,7 +71,7 @@ function OrderCard({ order }: { order: Order }) {
                 <p className="text-xs text-foreground truncate">{item.productName}</p>
               </div>
               <div className="text-right flex-shrink-0">
-                <p className="text-xs font-bold text-foreground">{item.price} €</p>
+                <p className="text-xs font-bold text-foreground">{item.price.toLocaleString("fr-FR")} FCFA</p>
                 <p className="text-[10px] text-muted-foreground">× {item.quantity}</p>
               </div>
             </div>

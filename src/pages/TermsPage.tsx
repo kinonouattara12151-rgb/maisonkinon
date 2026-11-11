@@ -37,7 +37,7 @@ export default function TermsPage() {
         <h2 id="produits" className="text-base font-bold">3. Produits et prix</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           Les produits présentés sur le Site sont des parfums de marques de prestige proposés à
-          la vente sous réserve de disponibilité. Les prix sont indiqués en euros (€) toutes taxes
+          la vente sous réserve de disponibilité. Les prix sont indiqués en euros (FCFA) toutes taxes
           comprises (TTC). MAISON KINON se réserve le droit de modifier ses prix à tout moment,
           étant entendu que le prix applicable est celui en vigueur au moment de la validation de la
           commande.
@@ -92,7 +92,7 @@ export default function TermsPage() {
       <section aria-labelledby="livraison">
         <h2 id="livraison" className="text-base font-bold">7. Livraison</h2>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          La livraison est offerte pour toute commande supérieure à <strong>40 €</strong>.
+          La livraison est offerte pour toute commande supérieure à <strong>40 FCFA</strong>.
           Les délais indicatifs sont de 3 à 5 jours ouvrés en France métropolitaine.
           En cas de retard supérieur à 7 jours ouvrés, le Client peut annuler sa commande par
           courrier recommandé conformément à l'article L.216-6 du Code de la consommation.

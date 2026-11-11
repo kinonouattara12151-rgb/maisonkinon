@@ -1,4 +1,4 @@
-import type { Product } from "../types";
+﻿import type { Product } from "../types";
 
 export const PRODUCTS: Product[] = [
   {
@@ -6,7 +6,7 @@ export const PRODUCTS: Product[] = [
     brand: "Chanel",
     name: "N°5 Eau de Parfum",
     volume: "100 ml",
-    price: 148,
+    price: 97100,
     originalPrice: null,
     image: "https://images.unsplash.com/photo-1541643600914-78b084683702?w=400&h=400&fit=crop&auto=format",
     images: [
@@ -33,8 +33,8 @@ export const PRODUCTS: Product[] = [
     brand: "Dior",
     name: "Sauvage Eau de Toilette",
     volume: "100 ml",
-    price: 119,
-    originalPrice: 139,
+    price: 78100,
+    originalPrice: 91200,
     image: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&h=400&fit=crop&auto=format",
     images: [
       "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&h=600&fit=crop&auto=format",
@@ -60,7 +60,7 @@ export const PRODUCTS: Product[] = [
     brand: "Yves Saint Laurent",
     name: "Libre Eau de Parfum",
     volume: "90 ml",
-    price: 135,
+    price: 88600,
     originalPrice: null,
     image: "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&h=400&fit=crop&auto=format",
     images: [
@@ -87,8 +87,8 @@ export const PRODUCTS: Product[] = [
     brand: "Giorgio Armani",
     name: "Acqua di Giò Eau de Parfum",
     volume: "75 ml",
-    price: 98,
-    originalPrice: 115,
+    price: 64300,
+    originalPrice: 75400,
     image: "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&h=400&fit=crop&auto=format",
     images: [
       "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&h=600&fit=crop&auto=format",
@@ -114,7 +114,7 @@ export const PRODUCTS: Product[] = [
     brand: "Lancôme",
     name: "La Vie Est Belle Eau de Parfum",
     volume: "100 ml",
-    price: 128,
+    price: 84000,
     originalPrice: null,
     image: "https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?w=400&h=400&fit=crop&auto=format",
     images: [
@@ -141,7 +141,7 @@ export const PRODUCTS: Product[] = [
     brand: "Guerlain",
     name: "Mon Guerlain Eau de Parfum",
     volume: "50 ml",
-    price: 89,
+    price: 58400,
     originalPrice: null,
     image: "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=400&h=400&fit=crop&auto=format",
     images: [
@@ -168,8 +168,8 @@ export const PRODUCTS: Product[] = [
     brand: "Paco Rabanne",
     name: "1 Million Eau de Toilette",
     volume: "100 ml",
-    price: 105,
-    originalPrice: 125,
+    price: 68900,
+    originalPrice: 82000,
     image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=400&h=400&fit=crop&auto=format",
     images: [
       "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=600&h=600&fit=crop&auto=format",
@@ -195,7 +195,7 @@ export const PRODUCTS: Product[] = [
     brand: "Burberry",
     name: "Her Eau de Parfum",
     volume: "100 ml",
-    price: 112,
+    price: 73500,
     originalPrice: null,
     image: "https://images.unsplash.com/photo-1600612253971-8b5e4c0b4a3f?w=400&h=400&fit=crop&auto=format",
     images: [
@@ -222,7 +222,7 @@ export const PRODUCTS: Product[] = [
     brand: "Tom Ford",
     name: "Black Orchid Eau de Parfum",
     volume: "50 ml",
-    price: 195,
+    price: 128000,
     originalPrice: null,
     image: "https://images.unsplash.com/photo-1616405577926-5b81fde08c45?w=400&h=400&fit=crop&auto=format",
     images: [
@@ -249,8 +249,8 @@ export const PRODUCTS: Product[] = [
     brand: "Valentino",
     name: "Donna Born In Roma",
     volume: "100 ml",
-    price: 138,
-    originalPrice: 155,
+    price: 90500,
+    originalPrice: 101700,
     image: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400&h=400&fit=crop&auto=format",
     images: [
       "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&h=600&fit=crop&auto=format",
@@ -276,7 +276,7 @@ export const PRODUCTS: Product[] = [
     brand: "Hermès",
     name: "Terre d'Hermès Eau de Toilette",
     volume: "100 ml",
-    price: 145,
+    price: 95100,
     originalPrice: null,
     image: "https://images.unsplash.com/photo-1607748862156-7c548e7e98f4?w=400&h=400&fit=crop&auto=format",
     images: [
@@ -303,8 +303,8 @@ export const PRODUCTS: Product[] = [
     brand: "Versace",
     name: "Bright Crystal Eau de Toilette",
     volume: "90 ml",
-    price: 78,
-    originalPrice: 95,
+    price: 51200,
+    originalPrice: 62300,
     image: "https://images.unsplash.com/photo-1574616984471-f2d16b2d4b8e?w=400&h=400&fit=crop&auto=format",
     images: [
       "https://images.unsplash.com/photo-1574616984471-f2d16b2d4b8e?w=600&h=600&fit=crop&auto=format",
@@ -353,11 +353,11 @@ export const FILTERS: Record<string, string[]> = {
     "Versace",
     "YSL",
   ],
-  "Prix (€)": [
-    "Moins de 50 €",
-    "50 € – 100 €",
-    "100 € – 150 €",
-    "Plus de 150 €",
+  "Prix (FCFA)": [
+    "Moins de 50 000 FCFA",
+    "50 000 – 75 000 FCFA",
+    "75 000 – 100 000 FCFA",
+    "Plus de 100 000 FCFA",
   ],
   Concentration: [
     "Eau de Parfum",

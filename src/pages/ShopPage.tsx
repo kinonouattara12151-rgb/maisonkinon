@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from "react";
+﻿import { useState, useMemo, useRef } from "react";
 import {
   ChevronRight, Grid3X3, List, SlidersHorizontal, ChevronDown, X,
 } from "lucide-react";
@@ -104,7 +104,7 @@ export default function ShopPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="bg-foreground py-1.5 text-center text-xs text-primary-foreground">
-        Livraison gratuite dès 40 € d'achat · Retours gratuits sous 30 jours
+        Livraison gratuite dès 26 200 FCFA d'achat · Retours gratuits sous 30 jours
       </div>
 
       <Header

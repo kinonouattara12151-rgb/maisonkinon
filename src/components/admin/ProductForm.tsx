@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+﻿import { useState, useEffect, useRef, useCallback } from "react";
 import { X, Save, Plus, Upload, Link, ImageOff } from "lucide-react";
 import type { Product } from "../../types";
 
@@ -228,7 +228,7 @@ export default function ProductForm({ editProduct, onSave, onCancel }: ProductFo
 
         {/* Prix */}
         <div className="flex flex-col gap-1">
-          <label htmlFor="price" className="text-xs font-semibold text-foreground">Prix (€) *</label>
+          <label htmlFor="price" className="text-xs font-semibold text-foreground">Prix (FCFA) *</label>
           <input id="price" required type="number" min={0} step={0.01} value={draft.price}
             onChange={(e) => set("price", parseFloat(e.target.value) || 0)}
             className="border border-border bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none" />
@@ -237,7 +237,7 @@ export default function ProductForm({ editProduct, onSave, onCancel }: ProductFo
         {/* Prix original */}
         <div className="flex flex-col gap-1">
           <label htmlFor="originalPrice" className="text-xs font-semibold text-foreground">
-            Prix original € <span className="font-normal text-muted-foreground">(si promo)</span>
+            Prix original FCFA <span className="font-normal text-muted-foreground">(si promo)</span>
           </label>
           <input id="originalPrice" type="number" min={0} step={0.01}
             value={draft.originalPrice ?? ""}

@@ -1,4 +1,4 @@
-import { PRODUCTS as STATIC_PRODUCTS } from "../data/products";
+﻿import { PRODUCTS as STATIC_PRODUCTS } from "../data/products";
 import type { Product } from "../types";
 import { supabase } from "./supabase";
 
@@ -102,11 +102,11 @@ function extractContext(text: string, prev: ConversationContext): ConversationCo
 
   /* ── Budget ── */
   const budgetMatch = q.match(
-    /(?:moins de|budget\s*(?:de)?|pas plus (?:de|que)|maximum|max|jusqu'à|dans les|en dessous de|sous|inférieur\w*\s*à|autour de|limite de|plafond de)\s*(\d{2,4})/,
+    /(?:moins de|budget\s*(?:de)?|pas plus (?:de|que)|maximum|max|jusqu'à|dans les|en dessous de|sous|inférieur\w*\s*à|autour de|limite de|plafond de)\s*(\d{3,8})/,
   );
   if (budgetMatch) ctx.budgetMax = parseInt(budgetMatch[1], 10);
 
-  const budgetMax2 = q.match(/(\d{2,4})\s*(?:€|euros?|e)?\s*(?:max|maximum)/);
+  const budgetMax2 = q.match(/(\d{3,8})\s*(?:FCFA|francs?|cfa|xof)?\s*(?:max|maximum)/i);
   if (budgetMax2) ctx.budgetMax = parseInt(budgetMax2[1], 10);
 
   /* ── « Trop cher » / budget serré ── */
@@ -154,7 +154,7 @@ function extractContext(text: string, prev: ConversationContext): ConversationCo
     q.includes("le moins cher") ||
     q.includes("moins cher")
   ) {
-    if (ctx.budgetMax === null) ctx.budgetMax = 100;
+    if (ctx.budgetMax === null) ctx.budgetMax = 65600;
   }
 
   /* ── Lever la contrainte budget ── */
@@ -260,10 +260,10 @@ export function filterProducts(ctx: ConversationContext): Product[] {
 }
 
 function formatProduct(p: Product): string {
-  let line = `• **${p.name}** — ${p.brand} · ${p.volume} — **${p.price} €**`;
+  let line = `• **${p.name}** — ${p.brand} · ${p.volume} — **${p.price.toLocaleString("fr-FR")} FCFA**`;
   if (p.badge === "Promo" && p.originalPrice) {
     const disc = Math.round((1 - p.price / p.originalPrice) * 100);
-    line += ` (au lieu de ${p.originalPrice} €, **-${disc}%**)`;
+    line += ` (au lieu de ${p.originalPrice.toLocaleString("fr-FR")} FCFA, **-${disc}%**)`;
   } else if (p.badge === "Promo") {
     line += ` 🏷️`;
   }
@@ -279,10 +279,10 @@ function formatProductList(products: Product[], max = 5): string {
 function formatProductDetail(p: Product): string {
   const lines: string[] = [];
   lines.push(`**${p.name}** — ${p.brand}`);
-  let meta = `${p.volume} — **${p.price} €**`;
+  let meta = `${p.volume} — **${p.price.toLocaleString("fr-FR")} FCFA**`;
   if (p.badge === "Promo" && p.originalPrice) {
     const disc = Math.round((1 - p.price / p.originalPrice) * 100);
-    meta += ` (au lieu de ${p.originalPrice} €, -${disc}%)`;
+    meta += ` (au lieu de ${p.originalPrice.toLocaleString("fr-FR")} FCFA, -${disc}%)`;
   }
   if (p.badge === "Nouveau") meta += " · Nouveauté ✨";
   if (p.badge === "Bestseller") meta += " · Bestseller";
@@ -325,7 +325,7 @@ function describeCriteria(ctx: ConversationContext): string {
   if (ctx.brands.length) {
     parts.push(`de chez **${ctx.brands.join("** / **")}**`);
   }
-  if (ctx.budgetMax !== null) parts.push(`à moins de **${ctx.budgetMax} €**`);
+  if (ctx.budgetMax !== null) parts.push(`à moins de **${ctx.budgetMax.toLocaleString("fr-FR")} FCFA**`);
   if (ctx.wantsPromo) parts.push("en **promotion**");
   return parts.join(", ");
 }
@@ -367,9 +367,9 @@ function noResultsResponse(ctx: ConversationContext): string {
       const cheapest = [...relaxed].sort((a, b) => a.price - b.price)[0];
       const genderStr = ctx.gender ? ` pour ${ctx.gender.toLowerCase()}` : "";
       return (
-        `Rien ne rentre dans ${ctx.budgetMax} € pour l'instant, c'est vrai. ` +
+        `Rien ne rentre dans ${ctx.budgetMax.toLocaleString("fr-FR")} FCFA pour l'instant, c'est vrai. ` +
         `Le parfum le plus accessible${genderStr} est **${cheapest.name}** ` +
-        `(${cheapest.brand}) à **${cheapest.price} €**.\n\n` +
+        `(${cheapest.brand}) à **${cheapest.price.toLocaleString("fr-FR")} FCFA**.\n\n` +
         `Souhaitez-vous revoir votre budget légèrement, ou préférez-vous voir ` +
         `les promotions en cours ?`
       );
@@ -381,7 +381,7 @@ function noResultsResponse(ctx: ConversationContext): string {
   return (
     `Je n'ai pas trouvé de parfum correspondant à tous vos critères, je vous prie de m'en excuser. ` +
     `Le plus abordable de notre catalogue est **${cheapest.name}** (${cheapest.brand}) ` +
-    `à **${cheapest.price} €**.\n\n` +
+    `à **${cheapest.price.toLocaleString("fr-FR")} FCFA**.\n\n` +
     `Pouvez-vous m'en dire un peu plus ? Genre, famille olfactive, budget...`
   );
 }
@@ -410,7 +410,7 @@ function isPerfumeRelated(text: string): boolean {
     "trop cher", "pas cher", "plus cher", "moins cher", "cher pour",
     "pas assez d'argent", "pas d'argent", "trop d'argent",
     "budget serré", "petit budget", "hors budget", "pas les moyens",
-    "prix", "coûte", "coute", "€", "euro",
+    "prix", "coûte", "coute", "FCFA", "euro",
   ];
   return perfumeTerms.some((t) => q.includes(t));
 }
@@ -729,7 +729,7 @@ export function chatAgent(messages: AgentMessage[]): string {
       /* Si un budget est déjà posé, on précise si ça rentre */
       if (ctx.budgetMax !== null && mentionedProduct.price > ctx.budgetMax) {
         detail +=
-          `\n\n⚠️ Ce parfum dépasse votre budget de ${ctx.budgetMax} €. ` +
+          `\n\n⚠️ Ce parfum dépasse votre budget de ${ctx.budgetMax.toLocaleString("fr-FR")} FCFA. ` +
           `Souhaitez-vous que je vous propose une alternative similaire, mais moins chère ?`;
       } else {
         detail +=
@@ -808,7 +808,7 @@ export function chatAgent(messages: AgentMessage[]): string {
     "Dites-moi ce qui vous ferait plaisir :\n" +
     "• Un **genre** : femme ou homme ?\n" +
     "• Une **famille olfactive** : boisé, floral, oriental, aquatique, fruité...\n" +
-    "• Un **budget** : « moins de 100 € » par exemple\n" +
+    "• Un **budget** : « moins de 70 000 FCFA » par exemple\n" +
     "• Une **marque** : Chanel, Dior, YSL, Armani...\n" +
     "• Les **promotions** en cours\n\n" +
     "Je garde tout en mémoire au fil de notre conversation, alors n'hésitez pas à y aller étape par étape."
