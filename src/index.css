@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Fond blanc, texte noir charbon — charte MAISON KINON */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+
+    /* Rouge primaire */ 
+    --primary: 0 72% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96%;
+    /* Ratio ≥ 4.5:1 sur blanc (#fff) et ≥ 4.5:1 sur --secondary (#f5f5f5)
+       Valeur 38% → #616161 → ratio 5.9:1 sur blanc, 5.4:1 sur #f5f5f5 ✅ WCAG AA */
+    --muted-foreground: 0 0% 38%;
+
+    --accent: 0 72% 96%;
+    --accent-foreground: 0 72% 45%;
+
+    --border: 0 0% 89%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Inter", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Masque la scrollbar de la nav horizontale sans bloquer le scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

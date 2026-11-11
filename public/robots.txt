@@ -1,0 +1,12 @@
+﻿User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+
+# Pages légales — accessibles aux robots pour l'indexation
+Allow: /confidentialite
+Allow: /cgu
+Allow: /cookies
+Allow: /mentions-legales
+
+Sitemap: https://maisonKinon.fr/sitemap.xml

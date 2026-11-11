@@ -1,0 +1,15 @@
+# ═══════════════════════════════════════════════════════════
+#  MAISON KINON — Configuration Supabase CLI
+#
+#  1. Remplacez project_id par l'ID de votre projet Supabase
+#     (Dashboard → Settings → General → Reference ID)
+#  2. Déployez la fonction : supabase functions deploy agent-chat
+#  3. Définissez le secret : supabase secrets set OPENAI_API_KEY=sk-...
+# ═══════════════════════════════════════════════════════════
+
+project_id = "sunauytbognpbiyzqbjr"
+
+[functions.agent-chat]
+# verify_jwt = false permet aux invités (non connectés) d'utiliser le chat.
+# L'authentification est vérifiée OPTIONNELLEMENT dans la fonction elle-même.
+verify_jwt = false

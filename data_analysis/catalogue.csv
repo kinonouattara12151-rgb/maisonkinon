@@ -1,0 +1,13 @@
+id,brand,name,volume_ml,price,original_price,badge,gender,family
+1,Chanel,N°5 Eau de Parfum,100,148,,Aucun,Femme,Floral
+2,Dior,Sauvage Eau de Toilette,100,119,139,Promo,Homme,Boisé
+3,Yves Saint Laurent,Libre Eau de Parfum,90,135,,Nouveau,Femme,Floral
+4,Giorgio Armani,Acqua di Giò Eau de Parfum,75,98,115,Promo,Homme,Aquatique
+5,Lancôme,La Vie Est Belle Eau de Parfum,100,128,,Aucun,Femme,Oriental
+6,Guerlain,Mon Guerlain Eau de Parfum,50,89,,Aucun,Femme,Oriental
+7,Paco Rabanne,1 Million Eau de Toilette,100,105,125,Promo,Homme,Oriental
+8,Burberry,Her Eau de Parfum,100,112,,Aucun,Femme,Fruité
+9,Tom Ford,Black Orchid Eau de Parfum,50,195,,Bestseller,Unisexe,Oriental
+10,Valentino,Donna Born In Roma,100,138,155,Promo,Femme,Floral
+11,Hermès,Terre d'Hermès Eau de Toilette,100,145,,Aucun,Homme,Boisé
+12,Versace,Bright Crystal Eau de Toilette,90,78,95,Promo,Femme,Floral
