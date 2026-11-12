@@ -195,7 +195,9 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 /* ── Page principale ── */
 export default function AdminPage() {
   const navigate = useNavigate();
-  const { isLoggedIn, loading: authLoading } = useAuth();
+  const { isLoggedIn, loading: authLoading, user } = useAuth();
+  const ADMIN_EMAIL = "kinonouattara12151@gmail.com";
+  const isAdmin = user?.email === ADMIN_EMAIL;
   const { products, loading: productsLoading, error: productsError, saveProduct, deleteProduct } = useProductsContext();
   const [tab, setTab] = useState<AdminTab>("dashboard");
   const [editProduct, setEditProduct] = useState<Product | null>(null);
@@ -207,7 +209,10 @@ export default function AdminPage() {
     if (!authLoading && !isLoggedIn) {
       navigate("/login", { replace: true });
     }
-  }, [authLoading, isLoggedIn, navigate]);
+    if (!authLoading && isLoggedIn && !isAdmin) {
+      navigate("/", { replace: true });
+    }
+  }, [authLoading, isLoggedIn, isAdmin, navigate]);
 
   const stats = useMemo(() => buildStats(products), [products]);
 
@@ -285,13 +290,13 @@ export default function AdminPage() {
   };
 
   /* ── Guard : si non authentifié, afficher un écran de chargement ── */
-  if (authLoading || !isLoggedIn) {
+  if (authLoading || !isLoggedIn || !isAdmin) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-background">
         <div className="text-center">
           <div className="mx-auto mb-3 h-8 w-8 animate-spin rounded-full border-2 border-primary border-t-transparent" />
           <p className="text-sm text-muted-foreground">
-            {authLoading ? "Vérification de l'accès..." : "Redirection vers la connexion..."}
+            {authLoading ? "Vérification de l'accès..." : "Accès non autorisé. Redirection..."}
           </p>
         </div>
       </div>
