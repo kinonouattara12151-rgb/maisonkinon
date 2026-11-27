@@ -8,7 +8,6 @@ import Footer                from "../components/Footer";
 import TopBar                from "../components/TopBar";
 
 import HeroSlider            from "../components/HeroSlider";
-import QuickLinks            from "../components/QuickLinks";
 import FlashSales            from "../components/FlashSales";
 import ArrivagesSection      from "../components/ArrivagesSection";
 import ProductCard           from "../components/ProductCard";
@@ -245,14 +244,9 @@ export default function ShopPage() {
       />
 
 
-      {/* ── Hero Slider + QuickLinks — accueil Arrivages uniquement ── */}
+      {/* ── Hero Slider — accueil Arrivages uniquement ── */}
       {activeCategory === "Arrivages & Divers" && (
-        <>
-          <HeroSlider onNavigate={handleCategoryChange} />
-          <div className="py-3">
-            <QuickLinks onNavigate={handleCategoryChange} />
-          </div>
-        </>
+        <HeroSlider onNavigate={handleCategoryChange} />
       )}
 
       <main className="mx-auto w-full max-w-[1400px] flex-1 px-4 py-3">
@@ -294,19 +288,6 @@ export default function ShopPage() {
               <p className="text-sm font-bold text-primary">Promotions en cours</p>
               <p className="text-xs text-muted-foreground">
                 {categoryProducts.length} article{categoryProducts.length > 1 ? "s" : ""} en promotion — prix barrés et réductions visibles sur chaque carte
-              </p>
-            </div>
-          </div>
-        )}
-
-        {/* ── Bandeau Arrivages ── */}
-        {activeCategory === "Arrivages & Divers" && (
-          <div className="mb-6 flex items-center gap-3 rounded-xl border border-amber-300 bg-amber-50 px-4 py-3">
-            <span className="text-2xl leading-none">🛍️</span>
-            <div>
-              <p className="text-sm font-bold text-amber-800">Mode · Chaussures · Jouets · Maison · Gadgets</p>
-              <p className="text-xs text-amber-700">
-                {categoryProducts.length} article{categoryProducts.length > 1 ? "s" : ""} disponibles — nouveaux arrivages réguliers depuis la Chine et l'international
               </p>
             </div>
           </div>
