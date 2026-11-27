@@ -1,6 +1,5 @@
-﻿import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Shield, Instagram, Facebook, MessageCircle, ChevronUp } from "lucide-react";
+﻿import { Link } from "react-router-dom";
+import { Shield, Instagram, Facebook, ChevronUp } from "lucide-react";
 import { useStore } from "../context/StoreContext";
 
 /* ── Données ─────────────────────────────────────────────────────────── */
@@ -22,21 +21,11 @@ const SERVICE_LINKS = [
   { label: "Contactez-nous",       href: `mailto:contact@maisonkinon.ci` },
 ];
 
-const PAYMENTS = [
-  { label: "Paiement à la livraison", bg: "bg-gray-800",   text: "text-white",                          short: "Livraison" },
-  { label: "Wave",                    bg: "bg-[#1A9BDB]",  text: "text-white",                          short: "Wave"      },
-  { label: "Orange Money",            bg: "bg-[#FF6600]",  text: "text-white",                          short: "Orange"    },
-  { label: "MTN MoMo",                bg: "bg-[#FFCC00]",  text: "text-black",                          short: "MTN"       },
-  { label: "Moov Money",              bg: "bg-[#0057A8]",  text: "text-white",                          short: "Moov"      },
-  { label: "Visa / Mastercard",       bg: "bg-white",      text: "text-gray-800 border border-gray-600", short: "Visa/MC"  },
-];
-
 /* Liens rapides mobile */
 const MOBILE_QUICK: { label: string; href: string; dim?: boolean }[] = [
   { label: "AIDE & FAQ",              href: "/aide" },
   { label: "SUIVRE MA COMMANDE",      href: "/aide#suivre-colis" },
   { label: "POLITIQUE DE RETOUR",     href: "/aide#retours" },
-  { label: "WHATSAPP",                href: "#whatsapp" },
   { label: "CONDITIONS GÉNÉRALES",    href: "/cgu" },
   { label: "CONFIDENTIALITÉ",         href: "/confidentialite" },
   { label: "ESPACE ADMIN",            href: "/admin", dim: true },
@@ -52,7 +41,6 @@ function TikTokIcon({ size = 16 }: { size?: number }) {
 
 export default function Footer() {
   const { settings } = useStore();
-  const waLink = `https://wa.me/${settings.whatsappNumber}?text=${encodeURIComponent("Bonjour MAISON KINON, j'ai une question.")}`;
 
   return (
     <footer className="bg-foreground text-primary-foreground">
@@ -73,37 +61,15 @@ export default function Footer() {
           Haut de la page
         </button>
 
-        {/* Paiements */}
-        <div className="border-b border-gray-700 px-4 py-5">
-          <p className="mb-3 text-center text-[10px] font-bold uppercase tracking-widest text-gray-500">
-            Moyens de paiement acceptés
-          </p>
-          <div className="flex flex-wrap justify-center gap-2">
-            {PAYMENTS.map(({ label, bg, text, short }) => (
-              <span key={label} title={label}
-                className={`${bg} ${text} rounded-md px-3 py-1.5 text-[11px] font-bold tracking-wide shadow-sm`}>
-                {short}
-              </span>
-            ))}
-          </div>
-        </div>
-
         {/* Grille liens rapides */}
         <div className="border-b border-gray-700 px-4 py-4">
           <div className="grid grid-cols-2 gap-x-4 gap-y-3">
-            {MOBILE_QUICK.map(({ label, href, dim }) =>
-              href === "#whatsapp" ? (
-                <a key={label} href={waLink} target="_blank" rel="noopener noreferrer"
-                  className="text-center text-[10px] font-semibold uppercase tracking-wide text-[#25D366] hover:text-[#1ab554]">
-                  {label}
-                </a>
-              ) : (
-                <Link key={label} to={href}
-                  className={`text-center text-[10px] font-semibold uppercase tracking-wide hover:text-white ${dim ? "text-gray-600 hover:text-gray-400" : "text-gray-400"}`}>
-                  {label}
-                </Link>
-              )
-            )}
+            {MOBILE_QUICK.map(({ label, href, dim }) => (
+              <Link key={label} to={href}
+                className={`text-center text-[10px] font-semibold uppercase tracking-wide hover:text-white ${dim ? "text-gray-600 hover:text-gray-400" : "text-gray-400"}`}>
+                {label}
+              </Link>
+            ))}
           </div>
         </div>
 
@@ -117,11 +83,6 @@ export default function Footer() {
             className="mt-1 block text-[11px] font-semibold text-gray-300 hover:text-white">
             +{settings.whatsappNumber}
           </a>
-          <a href={waLink} target="_blank" rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-4 py-1.5 text-xs font-bold text-white">
-            <MessageCircle size={13} />
-            Écrire sur WhatsApp
-          </a>
           <p className="mt-4 text-[10px] text-gray-600">
             © 2026 MAISON KINON — Tous droits réservés
           </p>
@@ -132,18 +93,6 @@ export default function Footer() {
           DESKTOP  ≥ md : layout original inchangé
       ══════════════════════════════════════════════════════════════ */}
       <div className="hidden md:block">
-
-        {/* Bande paiements */}
-        <div className="border-b border-gray-700">
-          <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-center gap-2 px-4 py-4">
-            {PAYMENTS.map(({ label, bg, text, short }) => (
-              <span key={label} title={label}
-                className={`${bg} ${text} rounded px-2.5 py-1 text-[11px] font-bold tracking-wide`}>
-                {short}
-              </span>
-            ))}
-          </div>
-        </div>
 
         {/* 4 colonnes */}
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-8 px-4 py-10 sm:grid-cols-2 md:grid-cols-4">
@@ -166,7 +115,6 @@ export default function Footer() {
               <a href="https://instagram.com/maisonkinon" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="text-gray-400 hover:text-white"><Instagram size={18} /></a>
               <a href="https://tiktok.com/@maisonkinon" target="_blank" rel="noopener noreferrer" aria-label="TikTok" className="text-gray-400 hover:text-white"><TikTokIcon size={18} /></a>
               <a href="https://facebook.com/maisonkinon" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="text-gray-400 hover:text-white"><Facebook size={18} /></a>
-              <a href={waLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-gray-400 hover:text-[#25D366]"><MessageCircle size={18} /></a>
             </div>
           </div>
 
@@ -194,10 +142,6 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-            <a href={waLink} target="_blank" rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-sm bg-[#25D366] px-3 py-2 text-xs font-semibold text-white hover:opacity-90">
-              <MessageCircle size={13} />Écrire sur WhatsApp
-            </a>
           </div>
 
           {/* Col 4 */}
