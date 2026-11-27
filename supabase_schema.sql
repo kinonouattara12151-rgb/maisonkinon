@@ -150,9 +150,30 @@ alter table public.orders
   add column if not exists customer_email text not null default '';
 
 -- ═══════════════════════════════════════════════
---  MIGRATION — Table produits (catalogue administrable)
---  Permet la persistance CRUD des produits depuis l'admin.
+--  MIGRATION — Annulation commandes robuste
+--  Coller dans SQL Editor et exécuter
 -- ═══════════════════════════════════════════════
+
+-- 1. Supprimer l'ancienne contrainte CHECK sur status
+alter table public.orders
+  drop constraint if exists orders_status_check;
+
+-- 2. Ajouter la nouvelle contrainte incluant 'annulée'
+alter table public.orders
+  add constraint orders_status_check
+  check (status in ('confirmée','en préparation','expédiée','livrée','annulée'));
+
+-- 3. Colonne horodatage d'annulation
+alter table public.orders
+  add column if not exists cancelled_at timestamptz;
+
+-- 4. Permettre au client de mettre à jour le statut et cancelled_at de SES commandes
+--    (nécessaire pour que cancelOrder() fonctionne côté client)
+drop policy if exists "orders: annulation par l'utilisateur" on public.orders;
+create policy "orders: annulation par l'utilisateur"
+  on public.orders for update
+  using (auth.uid() = user_id)
+  with check (auth.uid() = user_id);
 
 -- ── 7. Produits du catalogue ──
 create table if not exists public.products (
@@ -194,3 +215,35 @@ create policy "products: mise à jour par utilisateur authentifié"
 create policy "products: suppression par utilisateur authentifié"
   on public.products for delete
   using (auth.uid() is not null);
+
+-- ═══════════════════════════════════════════════
+--  MIGRATION — Colonne delivered_at
+--  Coller dans SQL Editor et exécuter
+-- ═══════════════════════════════════════════════
+alter table public.orders
+  add column if not exists delivered_at timestamptz;
+
+-- ═══════════════════════════════════════════════
+--  MIGRATION — Admin peut mettre à jour les commandes + Realtime
+--  Coller dans SQL Editor et exécuter
+-- ═══════════════════════════════════════════════
+
+-- 1. Policy UPDATE pour l'administrateur (tout utilisateur authentifié
+--    peut changer le statut d'une commande — boutique mono-admin)
+drop policy if exists "orders: mise à jour par l'admin" on public.orders;
+create policy "orders: mise à jour par l'admin"
+  on public.orders for update
+  using (auth.uid() is not null)
+  with check (auth.uid() is not null);
+
+-- 2. Active la diffusion Realtime sur la table orders
+--    (met à jour le client instantanément quand l'admin change un statut)
+do $$
+begin
+  if not exists (
+    select 1 from pg_publication_tables
+    where pubname = 'supabase_realtime' and tablename = 'orders'
+  ) then
+    alter publication supabase_realtime add table public.orders;
+  end if;
+end $$;

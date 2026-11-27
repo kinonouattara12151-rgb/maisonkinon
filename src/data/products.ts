@@ -1,5 +1,12 @@
 ﻿import type { Product } from "../types";
+import { SOINS_VISAGE }  from "./catalog/catalogSoinsVisage";
+import { SOINS_CORPS }   from "./catalog/catalogSoinsCorps";
+import { MAQUILLAGE }    from "./catalog/catalogMaquillage";
+import { CHEVEUX }       from "./catalog/catalogCheveux";
+import { HOMME }         from "./catalog/catalogHomme";
+import { ARRIVAGES }     from "./catalog/catalogArrivages";
 
+/** Parfums uniquement — conservé tel quel pour rétro-compatibilité */
 export const PRODUCTS: Product[] = [
   {
     id: 1,
@@ -15,6 +22,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=600&h=600&fit=crop&auto=format",
     ],
     badge: null,
+    category: "Parfums",
     gender: "Femme",
     family: "Floral",
     origine: "France — Grasse",
@@ -27,6 +35,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Rose de mai", "Jasmin", "Iris"],
       fond: ["Vétiver", "Santal", "Musc blanc"],
     },
+    rating: 4.9,
+    reviewCount: 312,
+    stock: 8,
   },
   {
     id: 2,
@@ -42,6 +53,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=600&h=600&fit=crop&auto=format",
     ],
     badge: "Promo",
+    category: "Parfums",
     gender: "Homme",
     family: "Boisé",
     origine: "France — Paris",
@@ -54,6 +66,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Lavande", "Géranium", "Poivre de Sichuan"],
       fond: ["Ambroxan", "Cèdre", "Labdanum"],
     },
+    rating: 4.8,
+    reviewCount: 487,
+    stock: 3,
   },
   {
     id: 3,
@@ -69,6 +84,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&h=600&fit=crop&auto=format",
     ],
     badge: "Nouveau",
+    category: "Parfums",
     gender: "Femme",
     family: "Floral",
     origine: "France — Paris",
@@ -81,6 +97,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Lavande de Provence", "Fleur d'oranger"],
       fond: ["Vanille", "Musc blanc", "Cèdre de l'Atlas"],
     },
+    rating: 4.7,
+    reviewCount: 203,
+    stock: 15,
   },
   {
     id: 4,
@@ -96,6 +115,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=600&h=600&fit=crop&auto=format",
     ],
     badge: "Promo",
+    category: "Parfums",
     gender: "Homme",
     family: "Aquatique",
     origine: "Italie — Milan",
@@ -108,6 +128,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Notes marines", "Romarin", "Jasmin"],
       fond: ["Patchouli", "Encens", "Vétiver"],
     },
+    rating: 4.6,
+    reviewCount: 178,
+    stock: 2,
   },
   {
     id: 5,
@@ -123,6 +146,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=600&h=600&fit=crop&auto=format",
     ],
     badge: null,
+    category: "Parfums",
     gender: "Femme",
     family: "Oriental",
     origine: "France — Paris",
@@ -135,6 +159,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Iris", "Jasmin", "Fleur d'oranger"],
       fond: ["Praline", "Vanille", "Patchouli", "Musc"],
     },
+    rating: 4.8,
+    reviewCount: 265,
+    stock: 11,
   },
   {
     id: 6,
@@ -150,6 +177,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&h=600&fit=crop&auto=format",
     ],
     badge: null,
+    category: "Parfums",
     gender: "Femme",
     family: "Oriental",
     origine: "France — Paris",
@@ -162,6 +190,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Lavande ultra-sensorielle", "Jasmin sambac"],
       fond: ["Vanille Tahitensis", "Santal de Mysore", "Coumarine"],
     },
+    rating: 4.5,
+    reviewCount: 94,
+    stock: 20,
   },
   {
     id: 7,
@@ -177,6 +208,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&h=600&fit=crop&auto=format",
     ],
     badge: "Promo",
+    category: "Parfums",
     gender: "Homme",
     family: "Oriental",
     origine: "Espagne — Barcelone",
@@ -189,6 +221,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Rose", "Cannelle", "Épices"],
       fond: ["Cuir", "Ambre", "Bois de patchouli"],
     },
+    rating: 4.7,
+    reviewCount: 341,
+    stock: 4,
   },
   {
     id: 8,
@@ -204,6 +239,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1541643600914-78b084683702?w=600&h=600&fit=crop&auto=format",
     ],
     badge: null,
+    category: "Parfums",
     gender: "Femme",
     family: "Fruité",
     origine: "Royaume-Uni — Londres",
@@ -216,6 +252,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Violette", "Jasmin", "Fleur de mai"],
       fond: ["Ambre", "Musc", "Vanille"],
     },
+    rating: 4.4,
+    reviewCount: 112,
+    stock: 18,
   },
   {
     id: 9,
@@ -231,6 +270,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1547887537-6158d64c35b3?w=600&h=600&fit=crop&auto=format",
     ],
     badge: "Bestseller",
+    category: "Parfums",
     gender: "Unisexe",
     family: "Oriental",
     origine: "États-Unis — New York",
@@ -243,6 +283,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Orchidée noire", "Épices", "Fruit de la passion"],
       fond: ["Patchouli", "Vanille", "Encens", "Santal"],
     },
+    rating: 4.9,
+    reviewCount: 198,
+    stock: 1,
   },
   {
     id: 10,
@@ -258,6 +301,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=600&h=600&fit=crop&auto=format",
     ],
     badge: "Promo",
+    category: "Parfums",
     gender: "Femme",
     family: "Floral",
     origine: "Italie — Rome",
@@ -270,6 +314,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Jasmin sambac", "Rose blanche"],
       fond: ["Vétiver de Java", "Musc blanc", "Santal"],
     },
+    rating: 4.6,
+    reviewCount: 157,
+    stock: 6,
   },
   {
     id: 11,
@@ -285,6 +332,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=600&h=600&fit=crop&auto=format",
     ],
     badge: null,
+    category: "Parfums",
     gender: "Homme",
     family: "Boisé",
     origine: "France — Paris",
@@ -297,6 +345,9 @@ export const PRODUCTS: Product[] = [
       coeur: ["Flint (silex)", "Poivre", "Géranium"],
       fond: ["Vétiver d'Haïti", "Cèdre", "Benjoin"],
     },
+    rating: 4.8,
+    reviewCount: 224,
+    stock: 9,
   },
   {
     id: 12,
@@ -312,6 +363,7 @@ export const PRODUCTS: Product[] = [
       "https://images.unsplash.com/photo-1528740561666-dc2479dc08ab?w=600&h=600&fit=crop&auto=format",
     ],
     badge: "Promo",
+    category: "Parfums",
     gender: "Femme",
     family: "Floral",
     origine: "Italie — Milan",
@@ -324,10 +376,14 @@ export const PRODUCTS: Product[] = [
       coeur: ["Pivoine", "Magnolia", "Rose"],
       fond: ["Acajou", "Ambre", "Musc"],
     },
+    rating: 4.3,
+    reviewCount: 89,
+    stock: 14,
   },
 ];
 
 export const NAV_CATEGORIES: string[] = [
+  "Arrivages & Divers",
   "Parfums",
   "Soins du visage",
   "Soins du corps",
@@ -365,6 +421,7 @@ export const FILTERS: Record<string, string[]> = {
     "Parfum",
     "Eau de Cologne",
   ],
+  Contenance: ["30 ml", "50 ml", "75 ml", "80 ml", "100 ml", "150 ml"],
 };
 
 export const SORT_OPTIONS: string[] = [
@@ -372,3 +429,116 @@ export const SORT_OPTIONS: string[] = [
   "Prix décroissant",
   "Nouveautés",
 ];
+
+/* ═══════════════════════════════════════════════════════════════════════
+   CATALOGUE GLOBAL — toutes catégories réunies
+   ═══════════════════════════════════════════════════════════════════════ */
+
+export const PRODUCTS_ALL: Product[] = [
+  ...PRODUCTS,
+  ...SOINS_VISAGE,
+  ...SOINS_CORPS,
+  ...MAQUILLAGE,
+  ...CHEVEUX,
+  ...HOMME,
+  ...ARRIVAGES,
+];
+
+/* ═══════════════════════════════════════════════════════════════════════
+   MARQUES — liste dynamique déduites du catalogue global
+   ═══════════════════════════════════════════════════════════════════════ */
+export const BRANDS_ALL: string[] = Array.from(
+  new Set(PRODUCTS_ALL.map((p) => p.brand)),
+).sort((a, b) => a.localeCompare(b, "fr"));
+
+/* ═══════════════════════════════════════════════════════════════════════
+   FILTRES PAR CATÉGORIE
+   ═══════════════════════════════════════════════════════════════════════ */
+
+const PRIX_FCFA = [
+  "Moins de 10 000 FCFA",
+  "10 000 – 30 000 FCFA",
+  "30 000 – 75 000 FCFA",
+  "Plus de 75 000 FCFA",
+];
+
+export const FILTERS_BY_CATEGORY: Record<string, Record<string, string[]>> = {
+  Parfums: {
+    Genre:          ["Femme", "Homme", "Unisexe"],
+    Famille:        ["Floral", "Oriental", "Boisé", "Aquatique", "Fruité", "Hespéridé"],
+    Marque:         BRANDS_ALL.filter((b) =>
+      PRODUCTS.some((p) => p.brand === b)
+    ),
+    Concentration:  ["Eau de Parfum", "Eau de Toilette", "Parfum", "Eau de Cologne"],
+    Contenance:     ["30 ml", "50 ml", "75 ml", "80 ml", "90 ml", "100 ml", "150 ml"],
+    "Prix (FCFA)":  ["Moins de 50 000 FCFA", "50 000 – 75 000 FCFA", "75 000 – 100 000 FCFA", "Plus de 100 000 FCFA"],
+  },
+  "Soins du visage": {
+    "Type de soin": ["Crème hydratante", "Sérum", "Nettoyant doux", "Eau micellaire", "Gel hydratant",
+                     "Crème de nuit", "Contour des yeux", "Masque", "Écran solaire"],
+    "Type de peau": ["Peaux sèches", "Peaux grasses", "Peaux mixtes", "Peaux sensibles", "Toutes peaux",
+                     "Peaux normales à sèches"],
+    Marque:         BRANDS_ALL.filter((b) => SOINS_VISAGE.some((p) => p.brand === b)),
+    "Prix (FCFA)":  PRIX_FCFA,
+  },
+  "Soins du corps": {
+    "Type de soin": ["Lait hydratant", "Huile corporelle", "Gel douche", "Gommage", "Beurre corporel",
+                     "Crème mains"],
+    "Type de peau": ["Peaux sèches", "Peaux sensibles", "Peaux très sèches", "Toutes peaux",
+                     "Peaux normales à sèches"],
+    Marque:         BRANDS_ALL.filter((b) => SOINS_CORPS.some((p) => p.brand === b)),
+    "Prix (FCFA)":  PRIX_FCFA,
+  },
+  Maquillage: {
+    "Type de produit": ["Fond de teint", "Rouge à lèvres", "Gloss", "Mascara", "Palette",
+                        "Anticernes", "Poudre"],
+    Finish:            ["Teint", "Lèvres", "Yeux"],
+    Marque:            BRANDS_ALL.filter((b) => MAQUILLAGE.some((p) => p.brand === b)),
+    "Prix (FCFA)":     PRIX_FCFA,
+  },
+  Cheveux: {
+    "Type de produit": ["Shampoing", "Après-shampoing", "Huile capillaire", "Masque cheveux",
+                        "Soin sans rinçage", "Gel crème"],
+    "Type de cheveux": ["Cheveux crépus", "Cheveux bouclés", "Cheveux ondulés", "Cheveux lisses",
+                        "Cheveux secs", "Cheveux indisciplinés", "Tous types"],
+    Marque:            BRANDS_ALL.filter((b) => CHEVEUX.some((p) => p.brand === b)),
+    "Prix (FCFA)":     PRIX_FCFA,
+  },
+  Homme: {
+    "Type de produit": ["Parfum homme", "Soin visage homme", "Gel douche homme", "Après-rasage",
+                        "Coffret homme"],
+    "Type de peau":    ["Peaux sensibles", "Peaux grasses", "Toutes peaux"],
+    Marque:            BRANDS_ALL.filter((b) => HOMME.some((p) => p.brand === b)),
+    "Prix (FCFA)":     ["Moins de 10 000 FCFA", "10 000 – 30 000 FCFA", "30 000 – 75 000 FCFA", "Plus de 75 000 FCFA"],
+  },
+  Marques: {
+    Marque:        BRANDS_ALL,
+    "Prix (FCFA)": ["Moins de 10 000 FCFA", "10 000 – 30 000 FCFA", "30 000 – 75 000 FCFA", "Plus de 75 000 FCFA"],
+  },
+  Soldes: {
+    Catégorie:     ["Parfums", "Soins du visage", "Soins du corps", "Maquillage", "Cheveux", "Homme", "Arrivages & Divers"],
+    Marque:        BRANDS_ALL,
+    "Prix (FCFA)": ["Moins de 10 000 FCFA", "10 000 – 30 000 FCFA", "30 000 – 75 000 FCFA", "Plus de 75 000 FCFA"],
+  },
+  "Arrivages & Divers": {
+    "Sous-catégorie": [
+      "Baskets",
+      "Claquettes & Sandales",
+      "Vêtements",
+      "Vêtements Enfants",
+      "Sacs & Maroquinerie",
+      "Accessoires Mode",
+      "Jouets & Jeux",
+      "Déco Noël & Fêtes",
+      "High-Tech & Gadgets",
+      "Déco & Maison",
+    ],
+    Disponibilité:    ["En stock", "Sur commande"],
+    "Taille / Pointure": [
+      "36", "37", "38", "39", "40", "41", "42", "43", "44", "45",
+      "S", "M", "L", "XL",
+    ],
+    Marque:           BRANDS_ALL.filter((b) => ARRIVAGES.some((p) => p.brand === b)),
+    "Prix (FCFA)":    ["Moins de 10 000 FCFA", "10 000 – 30 000 FCFA", "30 000 – 75 000 FCFA", "Plus de 75 000 FCFA"],
+  },
+};

@@ -4,6 +4,9 @@ import type { CartItem, DeliveryInfo } from "../types";
 import { useAuth } from "../context/AuthContext";
 import CheckoutModal from "./CheckoutModal";
 
+const FALLBACK_IMG =
+  "https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?w=160&h=160&fit=crop&auto=format";
+
 interface CartDrawerProps {
   open: boolean;
   onClose: () => void;
@@ -14,11 +17,26 @@ interface CartDrawerProps {
   onClear: () => void;
 }
 
+/* ── Miniature produit avec fallback image ── */
+function CartItemThumb({ src, alt }: { src: string; alt: string }) {
+  const [err, setErr] = useState(false);
+  return (
+    <div className="h-16 w-16 flex-shrink-0 overflow-hidden border border-border bg-gray-50 sm:h-20 sm:w-20">
+      <img
+        src={err ? FALLBACK_IMG : src}
+        alt={alt}
+        onError={() => setErr(true)}
+        className="h-full w-full object-cover"
+      />
+    </div>
+  );
+}
+
 export default function CartDrawer({
   open, onClose, items, cartTotal,
   onUpdateQuantity, onRemove, onClear,
 }: CartDrawerProps) {
-  const { isLoggedIn, user, placeOrder } = useAuth();
+  const { isLoggedIn, placeOrder } = useAuth();
   const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   const handleCheckoutClick = () => {
@@ -44,96 +62,166 @@ export default function CartDrawer({
 
   if (!open) return null;
 
+  const totalQty = items.reduce((s, i) => s + i.quantity, 0);
+
   return (
     <>
-      <div className="fixed inset-0 z-50 bg-black/50" onClick={onClose} aria-hidden="true" />
+      {/* Overlay */}
+      <div
+        className="fixed inset-0 z-50 bg-black/50"
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
+      {/* Tiroir */}
       <div
         className="fixed right-0 top-0 z-50 flex h-full w-full max-w-sm flex-col bg-card shadow-2xl sm:max-w-md"
         role="dialog"
         aria-modal="true"
         aria-label="Votre panier"
       >
-        {/* Header */}
+        {/* En-tête */}
         <div className="flex items-center justify-between border-b border-border px-4 py-4">
           <div className="flex items-center gap-2">
             <ShoppingBag size={18} className="text-primary" aria-hidden="true" />
             <h2 className="font-bold text-foreground">Mon panier</h2>
-            {items.length > 0 && (
+            {totalQty > 0 && (
               <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
-                {items.reduce((s, i) => s + i.quantity, 0)}
+                {totalQty}
               </span>
             )}
           </div>
-          <button type="button" aria-label="Fermer le panier" onClick={onClose} className="text-muted-foreground hover:text-foreground">
+          <button
+            type="button"
+            aria-label="Fermer le panier"
+            onClick={onClose}
+            className="rounded-full p-1 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+          >
             <X size={18} />
           </button>
         </div>
 
-        {/* Articles */}
+        {/* État vide */}
         {items.length === 0 ? (
           <div className="flex flex-1 flex-col items-center justify-center gap-3 p-8 text-center">
             <ShoppingBag size={40} className="text-muted-foreground/40" aria-hidden="true" />
             <p className="text-sm font-medium text-muted-foreground">Votre panier est vide</p>
-            <button type="button" onClick={onClose} className="text-xs text-primary underline hover:no-underline">
+            <button
+              type="button"
+              onClick={onClose}
+              className="text-xs text-primary underline hover:no-underline"
+            >
               Continuer mes achats
             </button>
           </div>
         ) : (
+          /* Liste articles */
           <div className="flex-1 overflow-y-auto p-4">
-            <div className="space-y-4">
+            <ul className="space-y-0" role="list" aria-label="Articles dans le panier">
               {items.map((item) => (
-                <div key={item.product.id} className="flex gap-3 border-b border-border pb-4 last:border-0">
-                  <div className="h-16 w-16 flex-shrink-0 overflow-hidden border border-border bg-gray-50 sm:h-20 sm:w-20">
-                    <img src={item.product.image} alt={item.product.name} className="h-full w-full object-cover" />
-                  </div>
+                <li
+                  key={item.product.id}
+                  className="flex gap-3 border-b border-border py-4 last:border-0"
+                >
+                  <CartItemThumb src={item.product.image} alt={item.product.name} />
+
                   <div className="flex min-w-0 flex-1 flex-col gap-1">
-                    <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">{item.product.brand}</p>
-                    <p className="line-clamp-2 text-xs font-medium text-foreground">{item.product.name}</p>
+                    <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+                      {item.product.brand}
+                    </p>
+                    <p className="line-clamp-2 text-xs font-medium text-foreground">
+                      {item.product.name}
+                    </p>
                     <p className="text-[10px] text-muted-foreground">{item.product.volume}</p>
-                    <div className="mt-auto flex items-center justify-between">
+
+                    <div className="mt-auto flex items-center justify-between gap-2">
+                      {/* Contrôle quantité */}
                       <div className="flex items-center border border-border">
-                        <button type="button" aria-label="Diminuer" onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)} className="flex h-7 w-7 items-center justify-center text-muted-foreground hover:bg-secondary hover:text-foreground">
+                        <button
+                          type="button"
+                          aria-label={`Diminuer la quantité de ${item.product.name}`}
+                          onClick={() => onUpdateQuantity(item.product.id, item.quantity - 1)}
+                          className="flex h-7 w-7 items-center justify-center text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                        >
                           <Minus size={11} />
                         </button>
-                        <span className="flex h-7 w-8 items-center justify-center text-xs font-semibold text-foreground">{item.quantity}</span>
-                        <button type="button" aria-label="Augmenter" onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)} className="flex h-7 w-7 items-center justify-center text-muted-foreground hover:bg-secondary hover:text-foreground">
+                        <span
+                          aria-label={`Quantité : ${item.quantity}`}
+                          className="flex h-7 w-8 items-center justify-center text-xs font-semibold text-foreground"
+                        >
+                          {item.quantity}
+                        </span>
+                        <button
+                          type="button"
+                          aria-label={`Augmenter la quantité de ${item.product.name}`}
+                          onClick={() => onUpdateQuantity(item.product.id, item.quantity + 1)}
+                          className="flex h-7 w-7 items-center justify-center text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                        >
                           <Plus size={11} />
                         </button>
                       </div>
+
+                      {/* Prix + suppression */}
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold text-foreground">{(item.product.price * item.quantity).toLocaleString("fr-FR")} FCFA</span>
-                        <button type="button" aria-label={`Retirer ${item.product.name}`} onClick={() => onRemove(item.product.id)} className="text-muted-foreground hover:text-red-500">
-                          <Trash2 size={13} />
+                        <span className="text-sm font-bold text-foreground">
+                          {(item.product.price * item.quantity).toLocaleString("fr-FR")} FCFA
+                        </span>
+                        <button
+                          type="button"
+                          aria-label={`Supprimer ${item.product.name} du panier`}
+                          onClick={() => onRemove(item.product.id)}
+                          className="flex h-7 w-7 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-red-50 hover:text-red-500"
+                          title="Supprimer l'article"
+                        >
+                          <Trash2 size={14} />
                         </button>
                       </div>
                     </div>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         )}
 
-        {/* Footer */}
+        {/* Pied — total + actions */}
         {items.length > 0 && (
           <div className="space-y-3 border-t border-border p-4">
             <div className="flex items-center justify-between">
-              <span className="text-sm text-muted-foreground">Sous-total</span>
-              <span className="text-base font-bold text-foreground">{cartTotal.toLocaleString("fr-FR")} FCFA</span>
+              <span className="text-sm text-muted-foreground">
+                Sous-total ({totalQty} article{totalQty > 1 ? "s" : ""})
+              </span>
+              <span className="text-base font-bold text-foreground">
+                {cartTotal.toLocaleString("fr-FR")} FCFA
+              </span>
             </div>
-            <p className="text-[11px] text-muted-foreground">Livraison gratuite dès 26 200 FCFA · Délai max 2 jours</p>
+            <p className="text-[11px] text-muted-foreground">
+              Livraison calculée à l'étape suivante
+            </p>
+
             <button
               type="button"
               onClick={handleCheckoutClick}
               className="flex w-full items-center justify-center gap-2 bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-red-700"
             >
-              {isLoggedIn
-                ? <><ArrowRight size={15} /> Commander ({cartTotal.toLocaleString("fr-FR")} FCFA)</>
-                : <><LogIn size={15} /> Se connecter pour commander</>
-              }
+              {isLoggedIn ? (
+                <>
+                  <ArrowRight size={15} />
+                  Commander — {cartTotal.toLocaleString("fr-FR")} FCFA
+                </>
+              ) : (
+                <>
+                  <LogIn size={15} />
+                  Se connecter pour commander
+                </>
+              )}
             </button>
-            <button type="button" onClick={onClear} className="w-full text-center text-xs text-muted-foreground underline hover:text-foreground">
+
+            <button
+              type="button"
+              onClick={onClear}
+              className="w-full text-center text-xs text-muted-foreground underline transition-colors hover:text-foreground"
+            >
               Vider le panier
             </button>
           </div>

@@ -20,8 +20,10 @@ export type DbOrder = {
   id: string;
   user_id: string;
   total: number;
-  status: "confirmée" | "en préparation" | "expédiée" | "livrée";
+  status: "confirmée" | "en préparation" | "expédiée" | "livrée" | "annulée";
   created_at: string;
+  cancelled_at?: string | null;
+  delivered_at?: string | null;
 };
 
 export type DbOrderItem = {

@@ -140,9 +140,9 @@ function FormattedMessage({
 
 export default function AIChatWidget() {
   const { user } = useAuth();
-  const { products } = useProductsContext();
+  const { allProducts } = useProductsContext();
   const { wishlist, toggleWishlist } = useWishlist(user?.id);
-  const { addToCart } = useCart(user?.id, products);
+  const { addToCart } = useCart(user?.id, allProducts);
 
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
