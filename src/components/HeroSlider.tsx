@@ -54,14 +54,14 @@ export default function HeroSlider({ onNavigate }: HeroSliderProps) {
 
   return (
     <div
-      className="relative w-full overflow-hidden"
-      style={{ minHeight: 320 }}
+      className="relative mx-3 overflow-hidden rounded-xl md:mx-0 md:rounded-none"
+      style={{ minHeight: 220 }}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
       <div
         key={animKey}
-        className={`${direction === "right" ? "slide-in-right" : "slide-in-left"} relative flex min-h-[320px] w-full items-center sm:min-h-[400px] md:min-h-[460px]`}
+        className={`${direction === "right" ? "slide-in-right" : "slide-in-left"} relative flex min-h-[220px] w-full items-center sm:min-h-[400px] md:min-h-[460px]`}
         style={{ background: slide.bg }}
       >
         {/* Overlay */}
@@ -116,13 +116,17 @@ export default function HeroSlider({ onNavigate }: HeroSliderProps) {
 
       {/* Dots */}
       {slides.length > 1 && (
-        <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
+        <div className="absolute bottom-3 left-1/2 z-20 flex -translate-x-1/2 items-center gap-1.5">
           {slides.map((s, i) => (
             <button key={s.id} type="button"
               onClick={() => goTo(i, i > current ? "right" : "left")}
               aria-label={`Aller au slide ${i + 1}`}
               aria-current={i === current}
-              className={`transition-all duration-300 ${i === current ? "h-2.5 w-7 bg-white" : "h-2 w-2 bg-white/40 hover:bg-white/70"}`}
+              className={`rounded-full transition-all duration-300 ${
+                i === current
+                  ? "h-2.5 w-7 bg-white"
+                  : "h-2 w-2 bg-white/50 hover:bg-white/80"
+              }`}
             />
           ))}
         </div>

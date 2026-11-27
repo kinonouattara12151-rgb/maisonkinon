@@ -15,7 +15,7 @@ export default function TopBar() {
     <div className="bg-[#1a0a0a] text-white" style={{ minHeight: 32 }}>
 
       {/* ── MOBILE ── */}
-      <div className="marquee-wrapper overflow-hidden sm:hidden">
+      <div className="marquee-wrapper overflow-hidden md:hidden">
         <div className="marquee-track flex items-center py-1.5 text-[11px] font-medium tracking-wide">
           {items.map((m, i) => (
             <span key={i} className="flex-shrink-0 whitespace-nowrap">
@@ -26,7 +26,7 @@ export default function TopBar() {
       </div>
 
       {/* ── DESKTOP ── */}
-      <div className="relative hidden sm:flex items-center">
+      <div className="relative hidden md:flex items-center">
         <div
           className="pointer-events-none absolute left-0 top-0 z-10 h-full w-16"
           style={{ background: "linear-gradient(to right, #1a0a0a, transparent)" }}

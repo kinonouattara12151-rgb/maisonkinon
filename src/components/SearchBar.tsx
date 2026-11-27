@@ -14,6 +14,10 @@ interface SearchBarProps {
   products?: Product[];
   placeholder?: string;
   className?: string;
+  /** "full" (défaut) ou "none" */
+  rounded?: "full" | "none";
+  /** Couleur de fond de l'input (ex: "#F3F4F6" sur mobile) */
+  bgColor?: string;
 }
 
 const MAX_PRODUCT_SUGGESTIONS = 5;
@@ -66,7 +70,10 @@ export default function SearchBar({
   products,
   placeholder = "Rechercher un produit, une marque...",
   className = "",
+  rounded = "full",
+  bgColor,
 }: SearchBarProps) {
+  const inputRoundedCls = rounded === "full" ? "rounded-full" : "rounded-none";
   const catalog = products ?? PRODUCTS_ALL;
 
   /* ── Debounce interne pour le calcul des suggestions ── */
@@ -221,7 +228,8 @@ export default function SearchBar({
           onChange={(e) => onChange(e.target.value)}
           onKeyDown={handleKeyDown}
           onFocus={() => { if (value.trim()) setOpen(true); }}
-          className="w-full rounded-full border border-border bg-white px-4 py-2 pr-20 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none shadow-sm"
+          className={`w-full ${inputRoundedCls} border border-border px-4 py-2 pr-20 text-sm placeholder:text-muted-foreground focus:border-primary focus:outline-none shadow-sm`}
+          style={{ backgroundColor: bgColor ?? undefined }}
           autoComplete="off"
         />
 

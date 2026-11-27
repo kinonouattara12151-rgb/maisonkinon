@@ -97,6 +97,8 @@ export default function ShopPage() {
   const [currentPage, setCurrentPage]       = useState(1);
   /* Vue Marques : marque sélectionnée pour filtrage cross-catégorie */
   const [brandFilter, setBrandFilter]       = useState<string | null>(null);
+  /* Bloc SEO dépliable */
+  const [seoOpen, setSeoOpen]               = useState(false);
   /* 24 = multiple de 2/3/4/5/6 → remplit toutes les colonnes sur chaque taille d'écran */
   const PAGE_SIZE = 24;
   const productsGridRef = useRef<HTMLDivElement>(null);
@@ -661,6 +663,61 @@ export default function ShopPage() {
           </div>
         </div>
       </main>
+
+      {/* ══ Bloc SEO dépliable (style Jumia CI) ══════════════════════ */}
+      <div className="border-t border-border bg-white px-4 py-4 md:px-8 md:py-6">
+        <div className="mx-auto max-w-[1400px]">
+          <button
+            type="button"
+            onClick={() => setSeoOpen((v) => !v)}
+            aria-expanded={seoOpen}
+            className="flex w-full items-center justify-between text-left"
+          >
+            <span className="text-sm font-bold text-foreground">
+              MAISON KINON — Votre boutique beauté en ligne en Côte d'Ivoire
+            </span>
+            <ChevronDown
+              size={16}
+              className={`flex-shrink-0 text-muted-foreground transition-transform duration-200 ${seoOpen ? "rotate-180" : ""}`}
+            />
+          </button>
+
+          {seoOpen && (
+            <div className="mt-3 space-y-2 text-xs leading-relaxed text-muted-foreground">
+              <p>
+                Bienvenue sur <strong className="text-foreground">MAISON KINON</strong>, votre
+                destination beauté de référence en Côte d'Ivoire. Nous proposons une large
+                sélection de <strong className="text-foreground">parfums originaux</strong>,
+                de <strong className="text-foreground">soins du visage</strong>, de{" "}
+                <strong className="text-foreground">soins du corps</strong>, de{" "}
+                <strong className="text-foreground">maquillage</strong> et de{" "}
+                <strong className="text-foreground">produits capillaires</strong> 100&nbsp;%
+                authentiques et scellés — livrés rapidement à Abidjan, Daloa et dans toute la CI.
+              </p>
+              <p>
+                Découvrez nos <strong className="text-foreground">arrivages réguliers</strong> de
+                mode, chaussures, jouets, accessoires maison et gadgets importés directement de Chine
+                et de l'international. Des prix compétitifs, un service client disponible 7j/7 et
+                plusieurs moyens de paiement flexibles : paiement à la livraison, Wave, Orange Money,
+                MTN MoMo, Moov Money et Visa/Mastercard.
+              </p>
+              <p>
+                MAISON KINON, c'est aussi une expérience d'achat simplifiée : recherche instantanée
+                avec suggestions, fiches produits détaillées, avis clients vérifiés et une interface
+                pensée mobile-first pour commander où que vous soyez.
+              </p>
+            </div>
+          )}
+
+          <button
+            type="button"
+            onClick={() => setSeoOpen((v) => !v)}
+            className="mt-2 text-xs font-semibold text-primary hover:underline"
+          >
+            {seoOpen ? "Voir moins ▲" : "Voir plus ▼"}
+          </button>
+        </div>
+      </div>
 
       <Footer />
       <AIChatWidget />
